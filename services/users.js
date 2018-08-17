@@ -1,0 +1,16 @@
+const db = require('../db')
+const users = {};
+
+users.getUser = async () => {
+  console.log('DEBUG:','i am in getUser');
+  const { rows } = await db.query('SELECT * FROM users ');
+  console.log('DEBUG:',rows);
+  return rows;  
+};
+
+users.postUser = async (user) => {
+  const { rows } = await db.query(' INSERT INTO USERS (NAME,EMAIL,PASSWORD,PHONE) VALUES ( $1 , $2 , $3 , $4 )', [user.name,user.email,user.password,user.phone]);
+  return rows;  
+};
+
+module.exports = users;
