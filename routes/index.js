@@ -2,7 +2,10 @@ const users = require('./users')
 const defaultPage = require('./default')
 
 module.exports = (app) => {
-  app.use('/users', users)
-  app.use('/v1/users', users)
+  //latest apis
   app.use('/', defaultPage)
+  app.use('/users', users)
+  //v1 apis
+  app.use('/v1/users', users)
+  
 }
