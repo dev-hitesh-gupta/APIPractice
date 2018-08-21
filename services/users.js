@@ -2,22 +2,24 @@ const db = require('../db')
 const sql = require('../utils/sqlengine');
 const users = {};
 
-users.getUser = async () => {
-  console.log('DEBUG:','i am in getUser');
-  const { rows } = await db.query('SELECT * FROM users ');
-  console.log('DEBUG:',rows);
-  return rows;  
-};
+users.getUser = async () => await db.query('SELECT * FROM users ')
+                                    .catch(err => {
+                                      console.error("ERROR: "+err);
+                                    });
 
-users.postUser = async (user) => {
-  //const { rows } = await db.query(' INSERT INTO USERS (NAME,EMAIL,PASSWORD,PHONE) VALUES ( $1 , $2 , $3 , $4 )', [user.name,user.email,user.password,user.phone]);
-  // return rows;
-  const { rows } = await db.query(sql.insert('users',user));
-  return rows;
-};
+users.postUser = async user =>  await db.query(sql.insert('users',user))
+                                        .catch(err => {
+                                          console.error("ERROR: "+err);
+                                        });
 
-// users.deleteUser = async (id) => {
-//   const { rows } = await 
-// }
+users.deleteUser = async id => await db.query(sql.delete('users',id))
+                                        .catch(err => {
+                                          console.error("ERROR: "+err);
+                                        });
+
+users.updateUser = async (id,user) => await db.query(sql.update('users',id,user))
+                                              .catch(err => {
+                                                console.error("ERROR: "+err);
+                                              });
 
 module.exports = users;

@@ -16,7 +16,24 @@ sql.insert = (tableName, params) => {
         return sqlquery;
 }
 
+sql.select = (tableName, query) => {
+    
+}
 
+sql.delete = (tableName, id) => {
+    let sqlquery = "delete from "+tableName+" where id = "+id;
+    console.info("SQL: "+sqlquery);
+    return sqlquery;    
+}
 
+sql.update = (tableName, id, params) => {
+    let sqlquery = "update "+tableName+" set ";
+    for( paramName in params )
+        if( params[paramName] )
+            sqlquery += paramName+" = '"+params[paramName]+"', ";
+    sqlquery = sqlquery.substring(0,(sqlquery.length - 2))+' where id = '+id;
+    console.info("SQL: "+sqlquery);
+    return sqlquery;
+}
 
 module.exports = sql;
