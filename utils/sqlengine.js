@@ -2,22 +2,29 @@
 const sql = {};
 
 sql.insert = (tableName, params) => {
-        let sqlquery = "insert into "+tableName ;
-        let values = 'values (';
-        let fields = ' (';
-        for( paramName in params ){
-            fields += paramName+', ';
-            values += `'`+params[paramName]+`', `;
-        }
-        values = values.substring(0,(values.length - 2))+')';
-        fields = fields.substring(0,(fields.length - 2))+')';
-        sqlquery += fields + values ;
-        console.info("SQL: "+sqlquery);
-        return sqlquery;
+    let sqlquery = "insert into "+tableName ;
+    let values = 'values (';
+    let fields = ' (';
+    for( paramName in params ){
+        fields += paramName+', ';
+        values += `'`+params[paramName]+`', `;
+    }
+    values = values.substring(0,(values.length - 2))+')';
+    fields = fields.substring(0,(fields.length - 2))+')';
+    sqlquery += fields + values ;
+    console.info("SQL: "+sqlquery);
+    return sqlquery;
 }
 
 sql.select = (tableName, query) => {
-    
+    let sqlquery = 'select * from '+tableName+' where ';
+    console.info("DEBUG: ",query);
+    for( queryName in query)
+        if( query[queryName] )
+            sqlquery += ' '+queryName+' = '+query[queryName]+' and ';
+    sqlquery = sqlquery.substring(0,(sqlquery.length - 5));
+    console.info("SQL: "+sqlquery);
+    return sqlquery;
 }
 
 sql.delete = (tableName, id) => {

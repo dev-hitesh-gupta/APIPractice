@@ -1,25 +1,22 @@
-const db = require('../db')
-const sql = require('../utils/sqlengine');
-const users = {};
+const Models = require('../server/models');
+const { users } = Models;
+const services = {};
 
-users.getUser = async () => await db.query('SELECT * FROM users ')
-                                    .catch(err => {
-                                      console.error("ERROR: "+err);
-                                    });
+try{
+    services.getUsers = async () => 
+        await users.findAll()
+    
+    services.postUser = async user =>  
+        await users.create(user)
 
-users.postUser = async user =>  await db.query(sql.insert('users',user))
-                                        .catch(err => {
-                                          console.error("ERROR: "+err);
-                                        });
+    services.deleteUser = async id => 
+        await users.destroy({ where:{ id } })
 
-users.deleteUser = async id => await db.query(sql.delete('users',id))
-                                        .catch(err => {
-                                          console.error("ERROR: "+err);
-                                        });
+    services.updateUser = async (id,user) => 
+        await users.update(user,{ where:{ id } })
 
-users.updateUser = async (id,user) => await db.query(sql.update('users',id,user))
-                                              .catch(err => {
-                                                console.error("ERROR: "+err);
-                                              });
+} catch(err) {
+    console.err('Services: ',err);
+}
 
-module.exports = users;
+module.exports = services;
