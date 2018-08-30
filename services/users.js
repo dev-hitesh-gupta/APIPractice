@@ -2,13 +2,19 @@ const Models = require('../db/models');
 const { users } = Models;
 const services = {};
 
-try{
-    services.getUsers = async () => 
-        await users.findAll({ where:{ isDeleted:false } })
-    
-    services.postUser = async user =>  
-        await users.create(user)
+    services.getUsers = async () => {
+        return await users.findAll({ where:{ isDeleted:false } })
 
+    }    
+
+    services.getUser = async id => {
+        return await users.findAll({ where:{ isDeleted:false } })
+
+    }
+
+    services.postUser = async user =>  {
+        return await users.create(user).catch(err => console.log('Error: ',err))
+    }
     services.deleteHardUser = async id => 
         await users.destroy({ where:{ id } })
 
@@ -18,8 +24,5 @@ try{
     services.updateUser = async (id,user) => 
         await users.update(user,{ where:{ id } })
 
-} catch(err) {
-    console.err('Services: ',err);
-}
 
 module.exports = services;

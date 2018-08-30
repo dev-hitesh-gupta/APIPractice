@@ -3,6 +3,7 @@ var form = [
         name: 'Name',
         type: 'input',
         label: true,
+        message: 'your adhaar card name',
         setting: {
             type: 'text',
             required: true,

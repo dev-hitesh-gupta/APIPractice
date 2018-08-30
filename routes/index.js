@@ -4,17 +4,19 @@ const defaultPage = require('./default')
 const fs = require('fs');
 const path = require('path');
 const basename = path.basename(module.filename);
-
+const basePath = '/api';
 module.exports = (app) => {
   //latest apis
   app.use('/', defaultPage)
-  app.use('/users', users_v2)
-  app.use('/users', users_v1)
-  //v2 apis
-  app.use('/v2/users', users_v2)
-  app.use('/v2/users', users_v1)
-  //v1 apis
-  app.use('/v1/users', users_v1)
+  app.use(basePath+'/v1/users',new users_v1().router)
+  app.use(basePath+'/v2/users',new users_v2().router)
+  // app.use('/users', users_v2)
+  // app.use('/users', users_v1)
+  // //v2 apis
+  // app.use('/v2/users', users_v2)
+  // app.use('/v2/users', users_v1)
+  // //v1 apis
+  // app.use('/v1/users', users_v1)
 
   // let paths = {};
   // fs
