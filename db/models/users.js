@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    userType: {
+      type: DataTypes.ENUM('B','P'),
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING,
       unique: true,
@@ -40,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
     foodchoice: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     createdAt: {
       allowNull: false,

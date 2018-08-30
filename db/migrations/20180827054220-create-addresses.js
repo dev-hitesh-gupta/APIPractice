@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       typeAddress: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM('PER', 'COR'),
         allowNull: false
       },
       userId: {
@@ -34,6 +34,10 @@ module.exports = {
           model: 'users',
           key: 'id'
         }
+      },
+      isDeleted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,

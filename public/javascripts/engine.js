@@ -45,7 +45,7 @@ $(document).ready(function () {
                 div.append(label);
             }
             div.className = 'form-group';
-            field.list.map(item => {
+            field.list.map(item => {       
                 let radio = document.createElement('div');
                 let itemRadio = document.createElement('input');
                 let itemLabel = document.createElement('label');
