@@ -26,11 +26,11 @@ class BuisnessUser extends User{
 }
 
 class Address {
-constructor(address, city, state, country, zip) {
-    this.address = address;
-    this.city = city;
-    this.state = state;
-    this.country = country;
-    this.zip = zip;
-}
+    constructor(address, city, state, country, zip) {
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.zip = zip;
+    }
 }

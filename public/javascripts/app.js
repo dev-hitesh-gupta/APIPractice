@@ -34,7 +34,7 @@ const addUserToTable = (user) => {
     const {address , city, state, country, zip} = user.permanentAddress;
     let cor = 'NA';
     if(user.corAddress)
-        cor = `<td>`+user.corAddress.address+', '+user.corAddress.city+', '+user.corAddress.state+', '+user.corAddress.country+' '+user.corAddress.zip+`</td>`;
+        cor = user.corAddress.address+', '+user.corAddress.city+', '+user.corAddress.state+', '+user.corAddress.country+' '+user.corAddress.zip;
     $('#tableBody').html( $('#tableBody').html()+ `<tr>   
                         <td>`+user.fullname+`</td>
                         <td>`+user.email+`</td>
@@ -42,8 +42,11 @@ const addUserToTable = (user) => {
                         <td>`+user.password+`</td>
                         <td>`+user.constructor.name+`</td>
                         <td>`+address+', '+city+', '+state+', '+country+' '+zip+`</td>
-                        `+cor+`
-                     </tr>`);
+                        <td>`+cor+`</td>
+                     <td><button type="button" class="btn btn-danger">Del</button></td>
+                     <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Update</button>
+                     </td>
+                        </tr>`);
 }
 
 

@@ -4,13 +4,16 @@ const services = {};
 
 try{
     services.getUsers = async () => 
-        await users.findAll()
+        await users.findAll({ where:{ isDeleted:false } })
     
     services.postUser = async user =>  
         await users.create(user)
 
-    services.deleteUser = async id => 
+    services.deleteHardUser = async id => 
         await users.destroy({ where:{ id } })
+
+    services.deleteSoftUser = async id => 
+        await users.update({ isDeleted: true },{ where:{ id } })    
 
     services.updateUser = async (id,user) => 
         await users.update(user,{ where:{ id } })

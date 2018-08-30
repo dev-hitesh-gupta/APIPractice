@@ -12,6 +12,10 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false
         },
+        userType: {
+          type: Sequelize.ENUM('B','P'),
+          allowNull: false
+        },
         email: {
           type: Sequelize.STRING,
           unique: true,
@@ -41,6 +45,10 @@ module.exports = {
         foodchoice: {
           type: Sequelize.STRING,
           allowNull: true
+        },
+        isDeleted: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false,
         },
         createdAt: {
           allowNull: false,
