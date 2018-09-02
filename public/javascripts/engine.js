@@ -73,7 +73,7 @@ $(document).ready(function () {
     $('form').html($('form').html() +
         `<div class="card-text">
             <input type="submit" class="btn btn-primary" style="margin-top: 5px"> 
-            <input type="reset" class="btn btn-primary" style="margin-top: 5px">
+            <input type="reset" class="btn btn-dark" style="margin-top: 5px">
         </div>`)
 
     $('#AddressQuestion0').click(showCorrespondence);
@@ -90,5 +90,21 @@ $(document).ready(function () {
     $('#HobbiesField').hide();
     $('#FoodChoiceField').hide();
     //$('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover()
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+      })
+      $('.alert').alert()
 
+      $.notify({
+        // options
+        message: 'Hello User... 😊' 
+    },{
+        // settings
+        type: 'info',
+        animate: {
+            enter: 'animated fadeInDown',
+            exit: 'animated fadeOutUp'
+        },
+    });
 });
