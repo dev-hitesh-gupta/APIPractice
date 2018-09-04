@@ -1,22 +1,28 @@
-
 $(document).ready(function () {
     form.map(field => {
-
         if (field.type === 'input') {
             let div = document.createElement('div');
             if (field.label) {
                 let label = document.createElement('label');
-                label.className = 'form-control';
+                label.className = 'col-sm-4 col-form-label';
                 label.innerHTML = field.name;
                 label.for = field.name + 'Input';
                 div.append(label);
             }
             let input = document.createElement('input');
-            div.className = 'form-group';
+            div.className = 'form-group row';
             div.id = field.name + 'Field';
-            input.className = 'form-control';
+            if (field.message) div.title = field.message;
+            input.className = 'col-sm-7 form-control';
             input.id = field.name + 'Input';
-            const { type, required, pattern, error, size, example } = field.setting
+            const {
+                type,
+                required,
+                pattern,
+                error,
+                size,
+                example
+            } = field.setting
             input.type = type;
             input.required = required;
             if (pattern && error) {
@@ -27,9 +33,8 @@ $(document).ready(function () {
                 input.min = size[0];
                 input.max = size[1];
             }
-            if (example) {
-                input.placeholder = example;
-            }
+            if (example) input.placeholder = example;
+
             div.append(input);
             $('form').append(div);
         }
@@ -45,28 +50,31 @@ $(document).ready(function () {
                 div.append(label);
             }
             div.className = 'form-group';
-            field.list.map(item => {       
-                let radio = document.createElement('div');
+            let radio = document.createElement('div');
+            radio.className = 'btn-group btn-group-toggle';
+            field.list.map(item => {
                 let itemRadio = document.createElement('input');
                 let itemLabel = document.createElement('label');
-                radio.className = 'form-check';
-                itemRadio.className = 'form-check-input';
+                //itemRadio.className = 'form-check-input';
                 itemRadio.type = field.type;
                 itemRadio.name = field.name;
                 itemRadio.required = field.setting.required;
                 itemRadio.id = itemLabel.for = field.name + field.list.indexOf(item);
                 itemRadio.value = field.name + field.list.indexOf(item);
-                itemLabel.className = 'form-check-label';
-                itemLabel.innerHTML = item;
-                radio.append(itemRadio);
+                itemLabel.className = 'btn btn-secondary';
+                itemLabel.append(itemRadio);
+                itemLabel.innerHTML += item;
                 radio.append(itemLabel);
-                div.append(radio);
             });
+            div.append(radio);
             $('form').append(div);
         }
-
     });
-    $('form').html($('form').html() + `<input type="submit" class="btn btn-primary" style="margin-top: 5px"> <input type="reset" class="btn btn-primary" style="margin-top: 5px">`)
+    $('form').html($('form').html() +
+        `<div class="card-text">
+            <input type="submit" class="btn btn-primary" style="margin-top: 5px"> 
+            <input type="reset" class="btn btn-dark" style="margin-top: 5px">
+        </div>`)
 
     $('#AddressQuestion0').click(showCorrespondence);
     $('#AddressQuestion1').click(hideCorrespondence);
@@ -81,9 +89,22 @@ $(document).ready(function () {
     $('#OrganisationField').hide();
     $('#HobbiesField').hide();
     $('#FoodChoiceField').hide();
-        
+    //$('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover()
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+      })
+      $('.alert').alert()
+
+      $.notify({
+        // options
+        message: 'Hello User... 😊' 
+    },{
+        // settings
+        type: 'info',
+        animate: {
+            enter: 'animated fadeInDown',
+            exit: 'animated fadeOutUp'
+        },
+    });
 });
-
-
-
-

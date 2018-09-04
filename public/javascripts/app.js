@@ -7,6 +7,10 @@ const showCorrespondence = () => {
     $('#CorrespondenceStateField').show();
     $('#CorrespondenceCountryField').show();
     $('#CorrespondenceZipField').show();
+    $('#AddressQuestion0').parent().removeClass();
+    $('#AddressQuestion1').parent().removeClass();
+    $('#AddressQuestion0').parent().addClass('btn btn-secondary active');
+    $('#AddressQuestion1').parent().addClass('btn btn-secondary');
 }
 const hideCorrespondence = () => {
     $('#CorrespondenceAddressField').hide();
@@ -14,6 +18,10 @@ const hideCorrespondence = () => {
     $('#CorrespondenceStateField').hide();
     $('#CorrespondenceCountryField').hide();
     $('#CorrespondenceZipField').hide();
+    $('#AddressQuestion0').parent().removeClass();
+    $('#AddressQuestion1').parent().removeClass();
+    $('#AddressQuestion1').parent().addClass('btn btn-secondary active');
+    $('#AddressQuestion0').parent().addClass('btn btn-secondary');
 }
 
 const showPersonal = () => {
@@ -21,6 +29,10 @@ const showPersonal = () => {
     $('#OrganisationField').hide();
     $('#HobbiesField').show();
     $('#FoodChoiceField').show();
+    $('#UserTypeQuestion1').parent().removeClass();
+    $('#UserTypeQuestion0').parent().removeClass();
+    $('#UserTypeQuestion1').parent().addClass('btn btn-secondary active');
+    $('#UserTypeQuestion0').parent().addClass('btn btn-secondary');
 }
 
 const showBuisness = () => {
@@ -28,6 +40,10 @@ const showBuisness = () => {
     $('#OrganisationField').show();
     $('#HobbiesField').hide();
     $('#FoodChoiceField').hide();
+    $('#UserTypeQuestion1').parent().removeClass();
+    $('#UserTypeQuestion0').parent().removeClass();
+    $('#UserTypeQuestion1').parent().addClass('btn btn-secondary');
+    $('#UserTypeQuestion0').parent().addClass('btn btn-secondary active');
 }
 
 const addUserToTable = (user) => {
@@ -36,17 +52,30 @@ const addUserToTable = (user) => {
     if(user.corAddress)
         cor = user.corAddress.address+', '+user.corAddress.city+', '+user.corAddress.state+', '+user.corAddress.country+' '+user.corAddress.zip;
     $('#tableBody').html( $('#tableBody').html()+ `<tr>   
-                        <td>`+user.fullname+`</td>
+                        <td>`+user.fullname+`
+                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;" data-toggle="modal" data-target="#updateModal"></button>
+                        </td>
                         <td>`+user.email+`</td>
                         <td>`+user.phone+`</td>
-                        <td>`+user.password+`</td>
+                        <td>`+user.password+`
+                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;" data-toggle="modal" data-target="#updateModal"></button>
+                        </td>
                         <td>`+user.constructor.name+`</td>
-                        <td>`+address+', '+city+', '+state+', '+country+' '+zip+`</td>
-                        <td>`+cor+`</td>
-                     <td><button type="button" class="btn btn-danger">Del</button></td>
-                     <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Update</button>
-                     </td>
-                        </tr>`);
+                        <td>`+address+', '+city+', '+state+', '+country+' '+zip+`
+                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;" data-toggle="modal" data-target="#updateModal"></button>
+                        </td>
+                        <td>`+cor+`
+                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;" data-toggle="modal" data-target="#updateModal"></button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default" style="background: url(icons/info.svg);height:1.65rem;" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></button>
+                            <button type="button" class="btn btn-default" style="background: url(icons/delete.svg);height:1.75rem;" data-toggle="modal" data-target="#deleteModal"></button>
+                        </td>
+                    </tr>`);
+    $('[data-toggle="popover"]').popover()
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+      })
 }
 
 
