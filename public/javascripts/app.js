@@ -47,29 +47,34 @@ const showBuisness = () => {
 }
 
 const addUserToTable = (user) => {
-    const {address , city, state, country, zip} = user.permanentAddress;
+    let per = 'NA';
+    if(user.permanentAddress)
+    {
+        const {address , city, state, country, zip} = user.permanentAddress;
+        per = address+', '+city+', '+state+', '+country+' '+zip
+    }
     let cor = 'NA';
     if(user.corAddress)
         cor = user.corAddress.address+', '+user.corAddress.city+', '+user.corAddress.state+', '+user.corAddress.country+' '+user.corAddress.zip;
     $('#tableBody').html( $('#tableBody').html()+ `<tr>   
-                        <td>`+user.fullname+`
-                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;" data-toggle="modal" data-target="#updateModal"></button>
+                        <td>`+user.name+`
+                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#updateModal"></button>
                         </td>
                         <td>`+user.email+`</td>
                         <td>`+user.phone+`</td>
                         <td>`+user.password+`
-                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;" data-toggle="modal" data-target="#updateModal"></button>
+                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#updateModal"></button>
                         </td>
-                        <td>`+user.constructor.name+`</td>
-                        <td>`+address+', '+city+', '+state+', '+country+' '+zip+`
-                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;" data-toggle="modal" data-target="#updateModal"></button>
+                        <td>`+user.userType+`</td>
+                        <td>`+per+`
+                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#updateModal"></button>
                         </td>
                         <td>`+cor+`
-                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;" data-toggle="modal" data-target="#updateModal"></button>
+                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#updateModal"></button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-default" style="background: url(icons/info.svg);height:1.65rem;" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></button>
-                            <button type="button" class="btn btn-default" style="background: url(icons/delete.svg);height:1.75rem;" data-toggle="modal" data-target="#deleteModal"></button>
+                            <button type="button" class="btn btn-default" style="background: url(icons/info.svg);height:1.65rem;background-size:cover;" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></button>
+                            <button type="button" class="btn btn-default" style="background: url(icons/delete.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#deleteModal"></button>
                         </td>
                     </tr>`);
     $('[data-toggle="popover"]').popover()
@@ -92,13 +97,19 @@ formSubmit = (evt) => {
     let user = null;
     if(userType == 'UserTypeQuestion0'){
         user =  new BuisnessUser($('#NameInput').val(),$('#PasswordInput').val(),address,correspondenceAddress,$('#EmailInput').val(),$('#PhoneInput').val(),$('#QualificationInput').val(),$('#OrganisationInput').val());
+        let data = {
+                name:$('#NameInput').val(),
+                password:$('#PasswordInput').val(),
+                email:$('#EmailInput').val(),
+                userType:'B',
+                phone:$('#PhoneInput').val()
+            }
+        postUser(data);
     }
     else{
         user = new PersonalUser($('#NameInput').val(),$('#PasswordInput').val(),address,correspondenceAddress,$('#EmailInput').val(),$('#PhoneInput').val(),$('#HobbiesInput').val(),$('#FoodChoiceInput').val());
     }
 
-    users.push(user);
-    console.log(users);
-    $('#tableBody').html('');
-    users.map(user => addUserToTable(user));
+    //users.push(user);
+    getUsers();
 }

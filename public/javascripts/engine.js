@@ -1,6 +1,6 @@
 $(document).ready(function () {
     form.map(field => {
-        if (field.type === 'input') {
+        if (field.type ==='input') {
             let div = document.createElement('div');
             if (field.label) {
                 let label = document.createElement('label');
@@ -95,16 +95,6 @@ $(document).ready(function () {
         trigger: 'focus'
       })
       $('.alert').alert()
-
-      $.notify({
-        // options
-        message: 'Hello User... 😊' 
-    },{
-        // settings
-        type: 'info',
-        animate: {
-            enter: 'animated fadeInDown',
-            exit: 'animated fadeOutUp'
-        },
-    });
+    getUsers();
+    
 });

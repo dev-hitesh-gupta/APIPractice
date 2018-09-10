@@ -45,10 +45,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    isDeleted: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE
@@ -57,7 +53,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DATE
     }
-  }, {});
+  }, 
+  {
+    timestamp: true,
+    paranoid: true
+  });
   users.associate = function(models) {
     // associations can be defined here
     users.hasMany(models.addresses, {
