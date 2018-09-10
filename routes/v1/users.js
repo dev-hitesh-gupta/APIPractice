@@ -9,7 +9,7 @@ class UserV1 {
     this.router = express.Router();
     this.router.get('/', async (req, res) => await this.getUsers(req, res));
     this.router.post('/', async (req, res) => await this.postUser(req, res));    
-    
+    this.router.delete('/:id', async (req, res) => await this.deleteUser(req, res));
     
   }
 
@@ -26,12 +26,13 @@ class UserV1 {
       });
     }
     
-    // router.delete('/:id', async (req, res) => {
-    //   var data = await userService.deleteHardUser(req.params.id);
-    //   return await res.status(200).send({
-    //     data
-    //   });
-    // })
+    async deleteUser(req, res) {
+      var data = await userService.deleteHardUser(req.params.id);
+      return await res.status(200).send({
+        data
+    });
+    }
+  
     
     // router.put('/:id', async (req, res) => {
     //   var data = await userService.updateUser(req.params.id, user)
@@ -83,6 +84,7 @@ class UserV1 {
 
   async getUsers(req, res){
       var data = await userService.getUsers();
+      console.error(req.path);
       if (data) return await res.status(200).send({
         data,
         version:1
