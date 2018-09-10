@@ -14,10 +14,8 @@
 
 // module.exports = router;
 
-const express = require('express');
-const userService = require('../../services/users');
-const addressService = require('../../services/address');
-const UserV1 = require('../v1/users');
+const userService = require('./usersCtrl');
+const UserV1 = require('./v1');
 
 class UserV2  extends UserV1 {
   

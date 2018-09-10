@@ -1,15 +1,11 @@
-const users_v1 = require('./v1/users')
-const users_v2 = require('./v2/users')
+const users = require('../components/users/index.js')
 const defaultPage = require('./default')
-const fs = require('fs');
-const path = require('path');
-const basename = path.basename(module.filename);
 const basePath = '/api';
 module.exports = (app) => {
   //latest apis
   app.use('/', defaultPage)
-  app.use(basePath+'/v1/users',new users_v1().router)
-  app.use(basePath+'/v2/users',new users_v2().router)
+  app.use(basePath+'/v1/users',new users.v1().router)
+  app.use(basePath+'/v2/users',new users.v2().router)
   // app.use('/users', users_v2)
   // app.use('/users', users_v1)
   // //v2 apis

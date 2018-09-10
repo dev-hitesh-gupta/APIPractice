@@ -1,7 +1,6 @@
 
 const express = require('express');
-const userService = require('../../services/users');
-const addressService = require('../../services/address');
+const userService = require('./usersCtrl');
 
 class UserV1 {
   
