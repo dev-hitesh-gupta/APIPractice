@@ -46,6 +46,8 @@ const showBuisness = () => {
     $('#UserTypeQuestion0').parent().addClass('btn btn-secondary active');
 }
 
+
+
 const addUserToTable = (user) => {
     let per = 'NA';
     if(user.permanentAddress)
@@ -58,12 +60,12 @@ const addUserToTable = (user) => {
         cor = user.corAddress.address+', '+user.corAddress.city+', '+user.corAddress.state+', '+user.corAddress.country+' '+user.corAddress.zip;
     $('#tableBody').html( $('#tableBody').html()+ `<tr>   
                         <td>`+user.name+`
-                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#updateModal"></button>
+                            <button type="button" id="`+user.id+`" name="name" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#updateModal"></button>
                         </td>
                         <td>`+user.email+`</td>
                         <td>`+user.phone+`</td>
                         <td>`+user.password+`
-                            <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#updateModal"></button>
+                            <button type="button" if="password" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#updateModal"></button>
                         </td>
                         <td>`+user.userType+`</td>
                         <td>`+per+`

@@ -95,6 +95,19 @@ $(document).ready(function () {
         trigger: 'focus'
       })
       $('.alert').alert()
-    getUsers();
     
+      getUsers();
+    var $trigger = null;
+    $('.modal').on('show.bs.modal', function (e) {
+        $trigger = $(e.relatedTarget);
+    });
+    $('#save').on('click', function(event){
+        var value = $('#exampleInputEmail1').val();
+        console.log($trigger[0].name ,$trigger[0].id);
+        //$('#myModal').modal('hide');
+    });
+    // $('#myModal').on('click', '.btn-primary', function(){
+    //     var value = $('#exampleInputEmail1').val();
+    //     console.log(value);
+    // });
 });

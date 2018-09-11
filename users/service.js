@@ -1,5 +1,5 @@
-const Models = require('../../db');
-const { users } = Models;
+const users = require('./users');
+
 const services = {};
 
     services.getUsers = async () => {
@@ -8,13 +8,18 @@ const services = {};
     }    
 
     services.getUser = async id => {
-        return await users.findAll()
+        return await users.findById(id)
 
     }
 
     services.postUser = async user =>  {
-        return await users.create(user).catch(err => console.log('Error: ',err))
+        return await users.create(user)
+    
+    
     }
+
+
+
     services.deleteHardUser = async id => 
         await users.destroy({ 
             where:{ id },
