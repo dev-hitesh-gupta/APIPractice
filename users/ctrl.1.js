@@ -9,6 +9,7 @@ class UserV1 {
     this.router.get('/', async (req, res) => await this.getUsers(req, res));
     this.router.post('/', async (req, res) => await this.postUser(req, res));    
     this.router.delete('/:id', async (req, res) => await this.deleteUser(req, res));
+    this.router.put('/:id', async (req, res) => await this.putUser(req, res));
     
   }
 
@@ -25,6 +26,19 @@ class UserV1 {
       });
     }
     
+    async putUser(req, res){
+      let values = req.body;
+      let user = {};
+      for (let value in values) {
+        if (values[value])
+          user[value] = values[value];
+      }
+      var data = await userService.updateUser(req.param.id,user);
+      return await res.status(200).send({
+        data
+      });
+    }
+
     async deleteUser(req, res) {
       var data = await userService.deleteHardUser(req.params.id);
       return await res.status(200).send({

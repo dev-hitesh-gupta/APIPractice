@@ -1,6 +1,6 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  const addresses = sequelize.define('addresses', {
+const db = require('../db');
+db['addresses'] = db.sequelize.import('addresses', (sequelize, DataTypes) =>
+  sequelize.define('addresses', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -42,16 +42,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DATE
     }
-   }, {
-     timestamp: true,
-     paranoid: true
-   });
-  addresses.associate = function(models) {
-    // associations can be defined here
-    addresses.belongsTo(models.users, {
-      foreignKey: 'userId',
-      onDelete: 'CASCADE'
-    });
-  };
-  return addresses;
-};
+  }, {
+      timestamp: true,
+      paranoid: true
+    }));
+
+db.sequelize.sync({ 
+//  force: true
+});
+
+module.exports = db['addresses'];

@@ -15,3 +15,22 @@ const getUsers = () =>
             
         }
     });
+
+const deleteUser = id =>     
+    $.ajax({
+        type: 'DELETE',
+        url: '/api/users/v2/'+id,
+        success: function() { 
+            $.notify({
+                message: 'User Deleted 🚫' 
+            },{
+                // settings
+                type: 'danger',
+                animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                },
+            });
+            getUsers();
+        }
+    });

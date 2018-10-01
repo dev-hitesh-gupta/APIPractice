@@ -6,7 +6,7 @@ console.log('routes index.js');
 
 module.exports = (app) => {
   //latest apis
-  app.use('/', defaultPage)
+  //app.use('/', defaultPage)
   app.use(basePath+'/users',components.users.router)
     
 }

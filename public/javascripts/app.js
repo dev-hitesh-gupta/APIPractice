@@ -58,7 +58,18 @@ const addUserToTable = (user) => {
     let cor = 'NA';
     if(user.corAddress)
         cor = user.corAddress.address+', '+user.corAddress.city+', '+user.corAddress.state+', '+user.corAddress.country+' '+user.corAddress.zip;
-    $('#tableBody').html( $('#tableBody').html()+ `<tr>   
+    
+    let extraDetail = '';
+    if(user.qualification)
+        extraDetail += ' qualification :'+user.qualification;
+    if(user.exp_years)
+        extraDetail += ' exp_years :'+user.exp_years;
+    if(user.hobbies)
+        extraDetail += ' hobbies :'+user.hobbies;
+    if(user.foodchoice)
+        extraDetail += ' foodchoice :'+user.foodchoice;
+    
+        $('#tableBody').html( $('#tableBody').html()+ `<tr>   
                         <td>`+user.name+`
                             <button type="button" id="`+user.id+`" name="name" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#updateModal"></button>
                         </td>
@@ -75,7 +86,7 @@ const addUserToTable = (user) => {
                             <button type="button" class="btn btn-default" style="background: url(icons/edit.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#updateModal"></button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-default" style="background: url(icons/info.svg);height:1.65rem;background-size:cover;" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></button>
+                            <button type="button" class="btn btn-default" style="background: url(icons/info.svg);height:1.65rem;background-size:cover;" data-toggle="popover" data-trigger="focus" data-placement="auto" title="Extra Info" data-content="`+extraDetail+`"></button>
                             <button type="button" class="btn btn-default" style="background: url(icons/delete.svg);height:1.75rem;background-size:cover;" data-toggle="modal" data-target="#deleteModal"></button>
                         </td>
                     </tr>`);

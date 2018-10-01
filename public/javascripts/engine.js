@@ -89,11 +89,11 @@ $(document).ready(function () {
     $('#OrganisationField').hide();
     $('#HobbiesField').hide();
     $('#FoodChoiceField').hide();
-    //$('[data-toggle="tooltip"]').tooltip()
-    $('[data-toggle="popover"]').popover()
-    $('.popover-dismiss').popover({
-        trigger: 'focus'
-      })
+    $('[data-toggle="tooltip"]').tooltip()
+    // $('[data-toggle="popover"]').popover()
+    // $('.popover-dismiss').popover({
+    //     trigger: 'focus'
+    //   })
       $('.alert').alert()
     
       getUsers();
@@ -110,4 +110,17 @@ $(document).ready(function () {
     //     var value = $('#exampleInputEmail1').val();
     //     console.log(value);
     // });
+
+    $.notify({
+        // options
+        message: 'Hello User... 😊' 
+    },{
+        // settings
+        type: 'info',
+        animate: {
+            enter: 'animated fadeInDown',
+            exit: 'animated fadeOutUp'
+        },
+    });
+
 });
