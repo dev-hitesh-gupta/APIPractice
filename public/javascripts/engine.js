@@ -89,12 +89,38 @@ $(document).ready(function () {
     $('#OrganisationField').hide();
     $('#HobbiesField').hide();
     $('#FoodChoiceField').hide();
-    //$('[data-toggle="tooltip"]').tooltip()
-    $('[data-toggle="popover"]').popover()
-    $('.popover-dismiss').popover({
-        trigger: 'focus'
-      })
+    $('[data-toggle="tooltip"]').tooltip()
+    // $('[data-toggle="popover"]').popover()
+    // $('.popover-dismiss').popover({
+    //     trigger: 'focus'
+    //   })
       $('.alert').alert()
-    getUsers();
     
+      getUsers();
+    var $trigger = null;
+    $('.modal').on('show.bs.modal', function (e) {
+        $trigger = $(e.relatedTarget);
+    });
+    $('#save').on('click', function(event){
+        var value = $('#exampleInputEmail1').val();
+        console.log($trigger[0].name ,$trigger[0].id);
+        //$('#myModal').modal('hide');
+    });
+    // $('#myModal').on('click', '.btn-primary', function(){
+    //     var value = $('#exampleInputEmail1').val();
+    //     console.log(value);
+    // });
+
+    $.notify({
+        // options
+        message: 'Hello User... 😊' 
+    },{
+        // settings
+        type: 'info',
+        animate: {
+            enter: 'animated fadeInDown',
+            exit: 'animated fadeOutUp'
+        },
+    });
+
 });
